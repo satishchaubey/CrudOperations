@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React,{Component} from 'react';
+import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/dist/css/bootstrap.css';
+import Header from './components/Header';
+import Show from './components/Showusers';
+import Create from './components/Createusers';
+import {route} from './Router';
+import Home from './components/Home';
+import Footer from './components/Footer'
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component{
+    views={
+        home:<Home/>,
+        create:<Create/>,
+        show: <Show/>
+    }
+    renderViews=()=>{
+        return this.views[route];
+    }
+    render(){
+        return(
+           <React.Fragment>
+            <Header/>
+           {this.renderViews()}
+           <Footer/>
+           </React.Fragment>
+        );
+    }
 }
-
-export default App;
